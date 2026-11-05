@@ -1,0 +1,15 @@
+{
+  "name": "money-flow-planner",
+  "version": "0.3.1",
+  "private": true,
+  "type": "module",
+  "description": "A fresh-session conscious spending plan and income-routing simulator.",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
