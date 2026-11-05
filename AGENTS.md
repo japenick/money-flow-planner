@@ -10,4 +10,4 @@ This is the standalone v3 app, separate from the older Data-runtime HTML builds 
 - New visits must start fresh. Do not add persistent browser storage, a backend, analytics or network access for setups without an explicit request.
 - Export/import must preserve complete account, income, CSP, rule and review definitions.
 - Preserve money conservation, integer-cent calculations, monthly cap rollover and distinct overflow versus funding shortages.
-- Do not alter the repository's requested private visibility or publish surrounding workspace files.
+- The repository is public by explicit user request. Keep source generic and do not publish surrounding workspace files or personal setups.
