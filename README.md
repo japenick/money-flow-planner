@@ -94,3 +94,15 @@ Deferred by the owner for a later release:
 - Prevent double counting payroll retirement contributions in take-home budgets and show total savings/investments alongside cash allocations.
 
 No gross-pay, tax-estimation or tax-advantaged deduction engine is implemented in this release. Reference for future federal estimate inputs: [IRS estimator FAQs](https://www.irs.gov/individuals/tax-withholding-estimator-faqs).
+
+## Dynamic projections and investment growth (v0.5)
+
+**Monthly projection** now includes account balance lines and an investment-value versus opening-capital-plus-contributions chart. Toggle account lines, move the month slider, or use the exact-value table to inspect the plan. Charts update with account balances, income, rules, category budgets and growth assumptions. Debt lines show debt owed as a positive amount. View controls do not alter the exported plan.
+
+Set an **Assumed annual investment growth (%)** per investment account in Accounts, or edit those same assumptions below the investment chart. All start at 0%. Negative rates model losses. Rates from -100% to 100% are accepted as scenarios, not recommended returns.
+
+The effective monthly rate is `(1 + annualRate / 100) ** (1 / 12) - 1`. Growth is rounded to cents and applied to the opening investment balance before income and flow rules. Contributions arrive at month-end for growth purposes and first grow the following month. Conditions and balance targets see that month's growth. A -100% annual scenario uses a zero monthly factor. Inactive accounts do not grow. Growth is tracked separately from external income and category allocations.
+
+Horizons support 1-360 months (up to 30 years). Growth and contributions reconcile with balances; unsafe numeric magnitudes produce a visible validation error. This deterministic scenario does not model volatility, inflation, fees, taxes, cash interest or spending not expressed by the existing account flows. Transfers to a spending account accumulate unless the plan explicitly routes them onward.
+
+Setup format v5 preserves growth rates. v1-v4 imports migrate, with older accounts defaulting to 0% growth. Older app versions cannot load v5 exports. Gross pay and tax estimation remain future work.
