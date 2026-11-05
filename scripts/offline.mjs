@@ -6,7 +6,7 @@ const read=async file=>(await readFile(path.join(root,file),'utf8')).replace(/^\
 const legacy=(await read('src/legacy.mjs')).replace(/^export\s*\{[^}]*\};?\s*$/gm,'').replace(/\bexport (?=(const|function|class)\b)/g,'');
 let model=await read('src/model.mjs');
 model=model.replace("import {parsePlan as parseLegacy,addMonth,thisMonth,isCash,newAccount} from './legacy.mjs';","const {parsePlan:parseLegacy,addMonth,thisMonth,isCash,newAccount}=Legacy;").replace(/^export\s*\{[^}]*\};?\s*$/gm,'').replace(/\bexport (?=(const|function|class)\b)/g,'');
-const exports=['template','sample','account','income','rule','parsePlan','budget','simulate','totalIncomeCents','monthlyIncomeCents','FREQUENCIES','BUCKETS','TYPES','isCash','references','thisMonth'];
+const exports=['template','sample','account','income','rule','parsePlan','budget','simulate','totalIncomeCents','monthlyIncomeCents','FREQUENCIES','BUCKETS','TYPES','isCash','references','thisMonth','detailItem','itemAnnualCents','itemMonthlyCents','detailTotal','DETAIL_EXAMPLES'];
 let app=await read('src/app.mjs');app=app.replace(/^import \{[^}]+\} from '\.\/model\.mjs';\r?\n/m,'const {'+exports.join(',')+'}=Model;\n');
 const code='\nconst Legacy=(()=>{\n'+legacy+'\nreturn {parsePlan,addMonth,thisMonth,isCash,newAccount};\n})();\nconst Model=(()=>{\n'+model+'\nreturn {'+exports.join(',')+'};\n})();\n'+app+'\n';
 if(/<\/script/i.test(code))throw Error('Unexpected script terminator in source.');

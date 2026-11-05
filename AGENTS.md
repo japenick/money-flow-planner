@@ -1,7 +1,7 @@
 # Money flow planner
 
 ## Scope
-This is the standalone v3 app, separate from the older Data-runtime HTML builds in the parent work record. Keep the reusable planner generic and its default template free of personal data.
+This is the standalone v4 app, separate from the older Data-runtime HTML builds in the parent work record. Keep the reusable planner generic and its default template free of personal data.
 
 ## Development
 - Use dependency-free browser ES modules and the existing authored model and style system.

@@ -6,10 +6,10 @@ A static web app for household take-home income, a Conscious Spending Plan, cond
 
 1. Enter income streams in **Income**. Each amount is take-home pay per selected pay period, after payroll taxes and deductions.
 2. Define receiving accounts, starting balances and cash buffers in **Accounts**.
-3. Set four editable buckets in **Conscious spending plan**: fixed costs, investments, savings and guilt-free spending. Fixed costs may use monthly line items.
+3. Set four editable buckets in **Conscious spending plan**: fixed costs, investments, savings and guilt-free spending. All buckets support detailed categories with amount/timeframe or a percentage of household take-home, optional owner, destination and notes.
 4. Define **Money flows** using a percentage, fixed amount or remaining CSP bucket allocation. Each flow has a source, destination, optional balance condition, monthly ceiling, balance target and overflow destination.
 5. Inspect **Monthly projection**, then use **Monthly review** with actual records.
-6. **Export setup** before leaving. **Load setup** restores exported v1, v2 or v3 JSON files. Older account-level income settings become explicit monthly income streams.
+6. **Export setup** before leaving. **Load setup** restores exported v1, v2, v3 or v4 JSON files. Older account-level income settings become explicit monthly income streams.
 
 Every visit starts with a basic template, including returns through the back/forward cache. No setup is read from or written to browser persistent storage. Closing or reloading loses unexported edits. A leave-page warning is shown after edits where the browser supports it.
 
@@ -24,7 +24,7 @@ Weekly income uses 52 pay periods, every two weeks 26, twice monthly 24, monthly
 
 ## CSP integration
 
-The four budget buckets can use income percentages or fixed amounts; fixed costs can instead sum monthly line items. The default 55 / 10 / 10 / 25 split is editable.
+The four budget buckets can use income percentages, fixed monthly targets, or the sum of their included category line items. The default 55 / 10 / 10 / 25 split is editable.
 
 A **CSP bucket remainder** flow requests the planned bucket amount minus amounts already classified in that bucket by preceding flows in that month. Classify final allocations only. Intermediate transfers should remain unclassified; the app cannot infer whether a routing leg represents consumption. Routed classifications are planned transfers, not transaction-verified spending.
 
@@ -50,7 +50,7 @@ npm start
 
 The preview server binds only to 127.0.0.1:4173 and serves `dist/`. The build copies only five allowlisted application assets. No data from the surrounding workspace enters the deployment.
 
-- `src/model.mjs`: current v3 income, budget, validation and simulation model.
+- `src/model.mjs`: current v4 income, budget, validation and simulation model.
 - `src/legacy.mjs`: isolated older plan parsing and migration support.
 - `src/app.mjs`: browser state and interactive views.
 - `styles.css`: responsive, keyboard-visible light/dark UI using local assets.
@@ -72,3 +72,25 @@ GitHub documentation: [custom Pages workflows and plan availability](https://doc
 No bank credentials, financial accounts, personal balances, analytics, external scripts or backend are included. The app makes no network calls for setup data. Exported JSON contains whatever the user entered, including account labels, hypothetical balances and meeting notes.
 
 No live bank access, transfers, trades, financial/tax advice, automatic sync or server-side account storage. Currency labels are supported, but currency conversion is not.
+
+## Detailed categories (v0.4)
+
+In **Conscious spending plan**, each bucket has a details section. Use **Add category** or **Add common categories**, then edit the purpose, person/owner, amount, timeframe, destination and notes. Common categories contain generic labels and zero amounts. Repeat additions reuse existing names.
+
+- Amounts may be fixed per week, every two weeks, twice monthly, monthly or yearly; or a percentage of household monthly take-home. Monthly equivalents round to cents. Annual totals use the original timeframe, so a yearly bill retains its full annual amount even when its monthly equivalent rounds.
+- **Include category** pauses a line without deleting it. Excluded lines contribute zero.
+- Select **Sum of category line items** in the bucket target to make its details set the budget and existing CSP-remainder flow. Otherwise details simply break down the existing percentage/fixed target, with the remaining or excess amount displayed.
+- Destination accounts describe intended allocation; they do not generate transfer rules. Use **Money flows** for routing to specific accounts. Category details are never added as a second set of transfers.
+- These are allocations from take-home income. Do not enter payroll deductions already withheld as new spendable allocations.
+- Setup format v4 preserves all category fields. Imports migrate v1/v2 incomes and v3 monthly fixed-cost details. Older app releases cannot read v4 exports.
+
+## Future work: gross pay and tax-advantaged accounts
+
+Deferred by the owner for a later release:
+- Gross income per person/pay frequency, with a gross-to-take-home reconciliation.
+- Payroll deductions with explicit pre-tax versus after-tax treatment and account destinations; employer contributions tracked separately from spendable pay.
+- Tax-year-specific federal, state and applicable local tax estimates. ZIP code can help identify location but is not enough to determine taxes. Filing status, income, deductions, credits and work/residence jurisdictions also need explicit inputs or assumptions.
+- Manual withholding overrides and supported-jurisdiction notices. Distinguish estimates of annual tax liability from actual paycheck withholding.
+- Prevent double counting payroll retirement contributions in take-home budgets and show total savings/investments alongside cash allocations.
+
+No gross-pay, tax-estimation or tax-advantaged deduction engine is implemented in this release. Reference for future federal estimate inputs: [IRS estimator FAQs](https://www.irs.gov/individuals/tax-withholding-estimator-faqs).
