@@ -59,9 +59,9 @@ The preview server binds only to 127.0.0.1:4173 and serves `dist/`. The build co
 
 ## GitHub deployment
 
-Create a **private** repository named `money-flow-planner`, initialize it with a README so it has a default branch, then push this project's source. Do not upload the parent AI OS folder or any older personal finance snapshots.
+The source repository is [japenick/money-flow-planner](https://github.com/japenick/money-flow-planner) and is private. Do not upload the parent AI OS folder or any older personal finance snapshots.
 
-The workflow targets the `main` branch. Enable **Settings > Pages > Build and deployment > Source: GitHub Actions**. A push runs tests, builds the static files and publishes the resulting artifact. A pull request runs checks without deploying.
+The workflow targets the `main` branch. Enable **Settings > Pages > Build and deployment > Source: GitHub Actions**. Once Pages is available, also add the repository Actions variable `PAGES_ENABLED` with value `true` under **Settings > Secrets and variables > Actions > Variables**. A push always runs tests and builds the static files; deployment is enabled only by that variable. A pull request runs checks without deploying. Pages is currently unavailable on the owner's plan, so deployment remains disabled.
 
 GitHub Pages from a private repository requires a compatible GitHub plan. A private source repository does not automatically make its Pages site private. Keep the repository private as requested; do not change its visibility to work around hosting eligibility. If Pages is unavailable, host the same `dist/` files with a suitable static host while retaining private source.
 

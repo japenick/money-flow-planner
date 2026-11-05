@@ -20,11 +20,11 @@ jobs:
       - run: npm test
       - run: npm run build
       - uses: actions/upload-pages-artifact@v4
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && vars.PAGES_ENABLED == 'true'
         with:
           path: dist
   deploy:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && vars.PAGES_ENABLED == 'true'
     needs: build
     runs-on: ubuntu-latest
     permissions:
