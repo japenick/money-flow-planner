@@ -13,6 +13,6 @@ if(/<\/script/i.test(code))throw Error('Unexpected script terminator in source.'
 const css='\n'+await read('styles.css')+'\n';const hash=s=>createHash('sha256').update(s).digest('base64');
 let html=await read('index.html');
 // Callback replacements preserve literal dollar sequences in JavaScript source.
-html=html.replace('<link rel="stylesheet" href="styles.css">',()=>'<style>'+css+'</style>').replace('<script type="module" src="src/app.mjs"></script>',()=>'<script type="module">'+code+'</script>');
+html=html.replace('<link rel="stylesheet" href="styles.css?v=0.4.1">',()=>'<style>'+css+'</style>').replace('<script type="module" src="src/app.mjs?v=0.4.1"></script>',()=>'<script type="module">'+code+'</script>');
 html=html.replace("script-src 'self'; style-src 'self';",`script-src 'sha256-${hash(code)}'; style-src 'sha256-${hash(css)}';`);
 await writeFile(path.join(root,'preview.html'),html);console.log('Portable preview generated, '+Buffer.byteLength(html)+' bytes.');
