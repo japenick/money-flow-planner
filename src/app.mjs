@@ -1,6 +1,6 @@
 // Browser UI: reusable fields, income/accounts, CSP budgets, rules, projections and review.
 // State exists only in memory. Files are the only supported way to save or restore setups.
-import {template,sample,account,income,rule,parsePlan,budget,simulate,totalIncomeCents,monthlyIncomeCents,FREQUENCIES,BUCKETS,TYPES,isCash,references,thisMonth,detailItem,itemAnnualCents,itemMonthlyCents,detailTotal,DETAIL_EXAMPLES} from './model.mjs?v=0.5.0';
+import {template,sample,account,income,rule,parsePlan,budget,simulate,totalIncomeCents,monthlyIncomeCents,FREQUENCIES,BUCKETS,TYPES,isCash,references,thisMonth,detailItem,itemAnnualCents,itemMonthlyCents,detailTotal,DETAIL_EXAMPLES} from './model.mjs?v=0.5.1';
 let plan=template(),tab='income',selectedMonth=0,dirty=false,reviewMonth=thisMonth();
 const opened=new Set(),hiddenAccounts=new Set();
 const $=selector=>document.querySelector(selector),uid=()=>crypto.randomUUID();

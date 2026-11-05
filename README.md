@@ -36,7 +36,7 @@ Rules run once each calendar month in listed order. Source cash and buffers alwa
 
 The **Already sent** field reduces first-month contribution-cap headroom only and does not add funds to opening balances again. Caps are per rule, not shared automatically across rules targeting the same account. Debt destinations cannot be overpaid. Investment accounts are destination only.
 
-For multiple hops, put funding rules first. Conditions see balances after monthly income and previous rules. The simulator adds no returns, interest, taxes, market changes, new card charges or unlisted spending.
+For multiple hops, put funding rules first. Conditions see balances after monthly income and previous rules. Investment returns use explicit growth assumptions. Cash interest, taxes, volatility, fees, new card charges and unlisted spending are not modeled.
 
 ## Develop and verify
 
