@@ -3,3 +3,4 @@
 
 /* Category breakdowns stay full-width so longer purposes and account labels can wrap. */
 .category-panel{margin-top:20px}.category-item{border-top:1px solid var(--border);padding:20px 0}.category-item:last-child{padding-bottom:0}.category-equivalent{font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600}.category-panel .row-head strong{overflow-wrap:anywhere}.bar{width:100%}
+.category-item .row-head strong{flex:1 1 180px}
